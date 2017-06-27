@@ -1,0 +1,33 @@
+﻿@model CreateRibbitViewModel
+
+<h1>Create a Ribbit</h1>
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="flash error">
+        @Html.ValidationMessageFor(m => m.Status)
+    </div>
+}
+
+<p>
+        @*
+        The reason for the form action being index, home is because
+        this is going to be rendered as part of a child action
+        and you cannot make requests for child actions
+        the reason for making it a child action is so we can use this in other parts of the application easily
+
+        basically going to treat the create ribbit form as a component
+        it will be saelf contained and isolated from any of thee other forms and models within our other views
+        and because of this we need our own error message area above.
+
+        
+
+        *@
+    @using (var frm = Html.BeginForm("index", "home"))
+    {
+        @Html.AntiForgeryToken()
+        @Html.TextAreaFor(m => m.Status, new { @class = "ribbitText"})
+        <input type="submit" value="Ribbit!" />
+    }
+
+</p>
